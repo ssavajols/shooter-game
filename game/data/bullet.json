@@ -1,0 +1,13 @@
+{
+    "name":"bullet",
+    "bullets": {
+        "0": {
+            "speed": 1,
+            "frequency": 3
+        },
+        "1": {
+            "speed": 0.4,
+            "frequency": 0.1
+        }
+    }
+}
