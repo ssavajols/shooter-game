@@ -18,7 +18,7 @@ define(
                     },
                     create: function(){
                         this.addItem('Difficulty');
-                        this.addItem('Lives');
+                        this.addItem('Lives', function(){ APPLICATION.option.gameOptions.addLive();});
                         this.addItem('Retour', function(){ APPLICATION.start('MainMenu');});
 
                         this.menu.position.set(this.game.width/2-this.menu.width/2, this.game.height-this.menu.height-50);

@@ -11,7 +11,13 @@ define(
             transparent: false,
             antialias: false,
             physicsConfig: null,
-            gameOptions: {}
+            gameOptions: {
+                lives:1,
+                difficulty:1,
+                addLive: function(){
+                    console.log(this.lives++);
+                }
+            }
         };
 
         return options;
