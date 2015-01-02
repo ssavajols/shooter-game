@@ -5,6 +5,11 @@ define(
         "character/Bullet"
     ],
     function(Player, Ennemy, Bullets){
+
+        /**
+         * @class BaseLevel
+         * @constructor
+         */
         var BaseLevel = function Level(){
             this.initialize();
             this.player = null;
@@ -14,14 +19,20 @@ define(
         _.extend(BaseLevel.prototype, {
             initialize: _.noop,
 
+            /**
+             *
+             */
             preload: function(){
 
-                this.load.spritesheet('fire', 'assets/sprite/fireball.png', 64, 64);
-                this.load.spritesheet('ship', 'assets/sprite/spaceship.png', 100, 100);
-                this.load.spritesheet('ennemies', 'assets/sprite/spaceshipennemies.png', 44, 44);
+                this.load.spritesheet('fire', 'assets/sprite/fireball.png', 32, 32);
+                this.load.spritesheet('ship', 'assets/sprite/spaceship.png', 32, 32);
+                this.load.spritesheet('ennemies', 'assets/sprite/spaceshipennemies.png', 32, 32);
 
             },
 
+            /**
+             *
+             */
             create: function(){
 
                 console.log("create");
@@ -38,7 +49,9 @@ define(
 
             },
 
-
+            /**
+             *
+             */
             update: function update(){
 
                 this.player.onUpdate();
@@ -50,21 +63,30 @@ define(
 
             },
 
+            /**
+             *
+             */
             shutdown: function shutdown(){
                 console.log("shutdown");
 
                 // REMOVE ELEMENTS HERE
             },
 
+            /**
+             *
+             */
             collisions:function collisions(){
-
-//        console.log(this.player, this.ennemies, this.bullets);
 
                 this.physics.arcade.overlap(this.player.sprite, this.ennemies, this.playerDead, null, this);
                 this.physics.arcade.overlap(this.bullets.ennemies, this.player.sprite, this.playerDead, null, this);
                 this.physics.arcade.overlap(this.bullets.player, this.ennemies, this.ennemyDead, null, this);
             },
 
+            /**
+             *
+             * @param bullet
+             * @param ennemy
+             */
             ennemyDead: function ennemyDead(bullet, ennemy){
                 console.log('collision bullet');
 
@@ -78,10 +100,18 @@ define(
 
             },
 
-            playerDead : function playerDead(){
-                console.log('collision player');
-                this.player.dead();
-                APPLICATION.start('MainMenu');
+            /**
+             *
+             * @param ennemy
+             * @param player
+             */
+            playerDead : function playerDead(ennemy, player){
+                if( this.player.lives > 1 ){
+                    this.player.die();
+                }else{
+                    this.player.dead();
+                    APPLICATION.start('MainMenu');
+                }
             }
 
 

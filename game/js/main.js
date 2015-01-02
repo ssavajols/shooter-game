@@ -19,25 +19,17 @@ define(
         'state/level/Level2'
     ],
     function(
-        Application,
-        option,
-        utils,
-        ET,
-        MainMenu,
-        GameOption,
-        Level1,
-        Level2
+            Application,
+            option,
+            utils,
+            ET,
+            MainMenu,
+            GameOption,
+            Level1,
+            Level2
         ){
+
         window.APPLICATION = new Application(option);
-
-        var bullets;
-        var ennemies;
-        var cursors;
-        var player;
-        var fire;
-
-        window.ennemyData = utils.loadJson("a", true);
-        window.bulletData = utils.loadJson("bullet", true);
 
         APPLICATION.newState('level1', false, new Level1());
         APPLICATION.newState('level2', false, new Level2());
@@ -45,7 +37,4 @@ define(
         APPLICATION.newState('MainMenu', false, new MainMenu());
         APPLICATION.newState('gameOption', false, new GameOption());
 
-        APPLICATION.start('MainMenu');
-
-//        APPLICATION.start('level'+ _.random(1,2));
     });

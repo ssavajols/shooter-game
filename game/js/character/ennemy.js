@@ -56,18 +56,17 @@ define(
 
             move: function move(xEnd, yEnd){
                 TweenLite.to(this.sprite.position, this.params.speed, {x:xEnd, y:yEnd, onComplete: _.bind(function(){
-                    ET.dispatchEvent({type:"remove:ennemy", ennemy: this.sprite});
+                    ET.dispatchEvent({type:"remove:ennemy", ennemy: this.sprite, type: "EnnemyStandard"});
                 }, this)});
             },
 
             onUpdate: function(){
-                this.state.game.debug.body(this.sprite);
+//                this.state.game.debug.body(this.sprite);
             },
 
             fireBullet: function(){
 
                 this._delayBullet = this.state.rnd.between(200, 2000);
-//        console.log(this._delayBullet);
 
                 clearTimeout(this.timer.bullet);
                 this.timer.bullet = setTimeout(_.bind(function(){
