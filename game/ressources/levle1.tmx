@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="30" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="mapx0y2" tilewidth="32" tileheight="32">
+  <image source="mapx0y2.jpg" width="264" height="264"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="10" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyl0stOwmAUReGqKAIioCgqIBdF8Y4HUUER3/+pXIN/Jyck9AwcfCm0O6WstJhl2T4GGOIK1xjhBrcYo5h2d7jHAx7xhGe8YOJ2rzBM8YYZ3vGBT7ebY4EvfGOJH6zw63Zb2MYOCtjFnruuYwllVHCAKg5RQ93tGjjCMZo4wSlaOHP7c1ygjQ66uEQPfbeP+mkf9dM+6qd91E/7qJ/2UT89f9RPu6ifdlE/7aJ+lq6rn23oZ+le6mcb+mmnfrZG/Sz9pvqZ66dtPR3nrp+uqZ+lfjqvfvqufpb66bz6Wernn3HsPquf5fTTf8l7//z9896/9V7/9Qf9RCvw
+  </data>
+ </layer>
+</map>

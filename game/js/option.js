@@ -12,10 +12,16 @@ define(
             antialias: false, // Antialiasing
             physicsConfig: null, // PhysicsConfig
 
+            debugBody: false, // Show debug bodies object
+
             // Global game options
             gameOptions: {
                 lives:3,
-                difficulty:1
+                difficulty:1,
+                bulletTypes: {
+                    PLAYER_STANDARD: 1,
+                    ENNEMY_STANDARD: 2
+                }
             }
         };
 

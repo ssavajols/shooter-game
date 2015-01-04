@@ -36,10 +36,12 @@ define(
                 this.sprite.events.onDestroy.add(_.bind(this.onDestroy, this));
                 this.sprite.events.onKilled.add(_.bind(this.onDestroy, this));
 
+                this.sprite.health = 3;
+
                 this.sprite.anchor.x = this.sprite.anchor.y = 0.5;
 
                 if( this.params ){
-                    setTimeout(_.bind(function(){
+                    this.timer.bullet = setTimeout(_.bind(function(){
                         this.fireBullet();
 
                         if( xStart !== xEnd && yStart !== yEnd ){
@@ -48,7 +50,9 @@ define(
 
                     }, this), this.params.delay*1000);
                 }else {
-                    this.fireBullet();
+                    this.timer.bullet = setTimeout(_.bind(function(){
+                        this.fireBullet();
+                    }, this), Math.random()*3000);
                 }
 
 
@@ -61,21 +65,13 @@ define(
             },
 
             onUpdate: function(){
-//                this.state.game.debug.body(this.sprite);
+                if( APPLICATION.option.debugBody ){
+                    this.state.game.debug.body(this.sprite);
+                }
             },
 
             fireBullet: function(){
-
-                this._delayBullet = this.state.rnd.between(200, 2000);
-
-                clearTimeout(this.timer.bullet);
-                this.timer.bullet = setTimeout(_.bind(function(){
-                    if( window.ET ){
-                        ET.emit({type:"bullet:add", sprite: this.sprite});
-
-                        this.fireBullet();
-                    }
-                }, this), this._delayBullet);
+                this.state.bulletManager.add(this.sprite, APPLICATION.vars.bulletTypes.ENNEMY_STANDARD);
             },
 
             onDestroy: function(){
