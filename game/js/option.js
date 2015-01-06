@@ -12,7 +12,7 @@ define(
             antialias: false, // Antialiasing
             physicsConfig: null, // PhysicsConfig
 
-            debugBody: false, // Show debug bodies object
+            debugBody: true, // Show debug bodies object
 
             // Global game options
             gameOptions: {
