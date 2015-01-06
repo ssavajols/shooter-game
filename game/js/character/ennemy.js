@@ -10,24 +10,25 @@ define(
         var Ennemy = function Ennemy(game, params){
             var frame, xStart, yStart, xEnd, yEnd;
 
+            this.params = params;
+            
             // config
             if( this.params ){
                 frame = this.params.sprite;
-                xStart = this.params.position.x/100*this.game.world.width;
-                xEnd = this.params.direction.x/100*this.game.world.width;
+                xStart = this.params.position.x/100*game.world.width;
+                xEnd = this.params.direction.x/100*game.world.width;
                 yStart = 0;
-                yEnd = this.game.world.height;
+                yEnd = game.world.height;
             }else{
-                frame = this.game.rnd.between(0, 100-1);
-                xStart = this.game.rnd.between(0,this.game.world.width);
+                frame = game.rnd.between(0, 100-1);
+                xStart = game.rnd.between(0,game.world.width);
                 xEnd = xStart;
-                yStart = this.game.rnd.between(0,this.game.world.height/2);;
+                yStart = game.rnd.between(0,game.world.height/2);;
                 yEnd = yStart;
             }
 
             Phaser.Sprite.call(this, game, xStart, yStart, 'ennemies', frame);
 
-            this.params = params;
             this.health = 3;
             this.timer = {bullet:null};
             this.anchor.setTo(0.5, 0.5);
@@ -71,7 +72,7 @@ define(
          */
         Ennemy.prototype.onUpdate = function(){
             if( APPLICATION.option.debugBody ){
-                this.game.game.debug.body(this);
+                this.game.debug.body(this);
             }
         };
 
@@ -79,7 +80,7 @@ define(
          *
          */
         Ennemy.prototype.fireBullet = function(){
-            this.game.bulletManager.add(this, APPLICATION.vars.bulletTypes.ENNEMY_STANDARD);
+            this.game.state.getCurrentState().bulletManager.add(this, APPLICATION.vars.bulletTypes.ENNEMY_STANDARD);
         };
 
         /**

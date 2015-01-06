@@ -21,7 +21,7 @@ define(
         Level1.prototype.constructor = Level1.prototype.constructor;
 
         Level1.prototype.preload = function(){
-            this.data = utils.loadJson("a", true);
+            this.data = utils.loadJson("level1-ennemies", true);
 
             this.map.preload(this,
                 [

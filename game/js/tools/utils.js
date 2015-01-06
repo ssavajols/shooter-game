@@ -1,6 +1,9 @@
 define(
     [],
     function(){
+
+        var _cache = {};
+
         return {
             /**
              *
@@ -9,16 +12,27 @@ define(
              * @param container
              * @return {*}
              */
-            loadJson: function loadJson(fileName, async, container){
-                var r;
+            loadJson: function loadJson(fileName, async, container, refresh){
+                var r, url;
 
-                console.log(arguments);
+                if( !_cache.json ){
+                    _cache.json = {};
+                }
+
+                url = "./data/"+ fileName + ".json";
+
+                if( !refresh && _cache.json[url] ){
+                    return _cache.json[url];
+                }
+
                 $.ajax({
-                    url: "./data/"+ fileName + ".json",
+                    url: url,
                     async: !async,
                     dataType:"json",
                     success: function(response){
                         r = response;
+
+                        _cache.json[url] = response;
 
                         if( typeof container !== "undefined" ){
                             container = r;

@@ -63,7 +63,7 @@ define(
 
             this.player.onUpdate();
             this.ennemies.forEach(function(e){
-                e.instance.onUpdate();
+                e.onUpdate();
             });
             this.bulletManager.onUpdate();
 
