@@ -35,7 +35,7 @@ define(
         BulletManager.prototype.constructor = BulletManager.prototype.constructor;
 
         /**
-         *
+         * @method BulletManager.prototype.preload
          */
         BulletManager.prototype.preload = function preload(){
             _.each(this._bulletType, function(type){
