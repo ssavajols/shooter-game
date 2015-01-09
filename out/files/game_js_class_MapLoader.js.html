@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>game/js/class/MapLoader.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Application.html">Application</a></li>
+                                <li><a href="../classes/BaseLevel.html">BaseLevel</a></li>
+                                <li><a href="../classes/BaseMenu.html">BaseMenu</a></li>
+                                <li><a href="../classes/BaseScene.html">BaseScene</a></li>
+                                <li><a href="../classes/Bullet.html">Bullet</a></li>
+                                <li><a href="../classes/BulletManager.html">BulletManager</a></li>
+                                <li><a href="../classes/Ennemy.html">Ennemy</a></li>
+                                <li><a href="../classes/Ennemy001.html">Ennemy001</a></li>
+                                <li><a href="../classes/EnnemyStandard.html">EnnemyStandard</a></li>
+                                <li><a href="../classes/Explosion.html">Explosion</a></li>
+                                <li><a href="../classes/GameOption.html">GameOption</a></li>
+                                <li><a href="../classes/Level1.html">Level1</a></li>
+                                <li><a href="../classes/MainMenu.html">MainMenu</a></li>
+                                <li><a href="../classes/MapLoader.html">MapLoader</a></li>
+                                <li><a href="../classes/ParallaxMap.html">ParallaxMap</a></li>
+                                <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/PlayerStandard.html">PlayerStandard</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: game/js/class/MapLoader.js</h1>
+                        
+                        <div class="file">
+                            <pre class="code prettyprint linenums">
+                        define(function(){
+                        
+                            /**
+                             * @class MapLoader
+                             * @constructor
+                             */
+                            var MapLoader = function MapLoader(){
+                        
+                                /**
+                                 *
+                                 * @type {null}
+                                 * @private
+                                 */
+                                this._map = null;
+                        
+                                /**
+                                 *
+                                 * @type {{}}
+                                 * @private
+                                 */
+                                this._layers = {};
+                        
+                                /**
+                                 *
+                                 * @type {null}
+                                 * @private
+                                 */
+                                this._mapName = null;
+                        
+                                /**
+                                 *
+                                 * @type {null}
+                                 * @private
+                                 */
+                                this._fileMap = null;
+                        
+                                /**
+                                 *
+                                 * @type {null}
+                                 * @private
+                                 */
+                                this._tileMapName = null;
+                        
+                                /**
+                                 *
+                                 * @type {null}
+                                 * @private
+                                 */
+                                this._tileMapFile = null;
+                        
+                                /**
+                                 *
+                                 * @type {null}
+                                 * @private
+                                 */
+                                this._state = null;
+                            };
+                        
+                            /**
+                             *
+                             * @param name
+                             * @param file
+                             * @param tileMapName
+                             * @param tileMapFile
+                             * @param state
+                             * @return {MapLoader}
+                             */
+                            MapLoader.prototype.preload = function preload(mapName, fileMap, tileMapName, tileMapFile, state){
+                        
+                                this._mapName = mapName;
+                                this._fileMap = fileMap;
+                                this._tileMapName = tileMapName;
+                                this._tileMapFile = tileMapFile;
+                                this._state = state;
+                        
+                                this._state.load.image(this._mapName, this._fileMap);
+                                this._state.load.tilemap(this._tileMapName, this._tileMapFile, null, Phaser.Tilemap.TILED_JSON);
+                        
+                                return this;
+                            };
+                        
+                            /**
+                             * @param name
+                             * @param file
+                             * @param tileMapName
+                             * @param tileMapFile
+                             * @return MapLoader
+                             */
+                            MapLoader.prototype.setMap = function setMap(){
+                        
+                                this._map = this._state.add.tilemap(this._tileMapName);
+                                this._map.addTilesetImage(this._mapName)
+                                this._layers.defaultLayer = this._map.createLayer(&#x27;level1&#x27;);
+                                this._layers.defaultLayer.resizeWorld();
+                        
+                                return this;
+                            };
+                        
+                            /**
+                             *
+                             * @param name
+                             * @return {*|Phaser.TilemapLayer|PhaserTilemapLayer}
+                             */
+                            MapLoader.prototype.createLayer = function createLayer(name){
+                                return this._layers[name] = this._map.createLayer(name);
+                            };
+                        
+                            /**
+                             *
+                             * @return {_map}
+                             */
+                            MapLoader.prototype.getMap = function getMap(){
+                                return this._map;
+                            };
+                        
+                            /**
+                             *
+                             * @return {_layers}
+                             */
+                            MapLoader.prototype.getLayers = function getLayers(){
+                                return this._layers;
+                            };
+                        
+                            /**
+                             *
+                             * @param index
+                             * @return {*}
+                             */
+                            MapLoader.prototype.getLayer = function getLayer(index){
+                                return typeof this._layers[index] !== &#x27;undefined&#x27; ? this._layers[index] : undefined;
+                            };
+                        
+                            return MapLoader;
+                        });
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

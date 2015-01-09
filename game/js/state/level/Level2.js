@@ -1,7 +1,7 @@
 define(
     [
         'state/BaseLevel',
-        "character/Ennemy"
+        "character/ennemy/ennemies",
     ],
     function(BaseLevel, Ennemy){
 

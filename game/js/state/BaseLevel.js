@@ -1,12 +1,13 @@
 define(
     [
         "character/Player",
-        "character/Ennemy",
+        "character/ennemy/ennemies",
         "character/Explosion",
         "class/BulletManager",
         "class/ParallaxMap",
+        "tools/utils",
     ],
-    function(Player, Ennemy, Explosion, BulletManager, ParallaxMap){
+    function(Player, ennemies, Explosion, BulletManager, ParallaxMap, utils){
 
         /**
          * @class BaseLevel
@@ -17,6 +18,8 @@ define(
             this.bulletManager = null;
             this.explosions = null;
             this.map = new ParallaxMap();
+            this.ennemiesClasses = ennemies;
+            this.ennemiesData = utils.loadJson("ennemies", true);
         };
 
         /**
@@ -62,8 +65,10 @@ define(
 
 
             this.player.onUpdate();
+
+            // DO WHILE INSTEAD FOREACH
             this.ennemies.forEach(function(e){
-                e.onUpdate();
+                e && e.onUpdate();
             });
             this.bulletManager.onUpdate();
 

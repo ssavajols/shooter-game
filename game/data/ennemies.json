@@ -1,0 +1,26 @@
+{
+    "0": {
+      "class": "Ennemy001",
+      "sprite": 1,
+      "moves": ["EnnemyMove001"],
+      "movesRandom": false
+    },
+  "1": {
+      "class": "Ennemy001",
+      "sprite": 2,
+      "moves": ["EnnemyMove001"],
+      "movesRandom": false
+  },
+  "2": {
+      "class": "Ennemy001",
+      "sprite": 3,
+      "moves": ["EnnemyMove001"],
+      "movesRandom": false
+  },
+  "3": {
+      "class": "Ennemy001",
+      "sprite": 3,
+      "moves": ["EnnemyMove001"],
+      "movesRandom": false
+  }
+}

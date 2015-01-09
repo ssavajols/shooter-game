@@ -2,10 +2,9 @@ define(
     [
         'tools/utils',
         'state/BaseLevel',
-        "character/Ennemy",
         'class/ParallaxMap'
     ],
-    function(utils, BaseLevel, Ennemy){
+    function(utils, BaseLevel){
 
         /**
          * @class Level1
@@ -21,7 +20,7 @@ define(
         Level1.prototype.constructor = Level1.prototype.constructor;
 
         Level1.prototype.preload = function(){
-            this.data = utils.loadJson("level1-ennemies", true);
+            this.data = utils.loadJson("level1-sequence", true);
 
             this.map.preload(this,
                 [
@@ -50,8 +49,9 @@ define(
          */
         Level1.prototype.createEnnemies = function createEnnemies(){
 
-            _.each(this.data.ennemySequence, _.bind(function(params){
-                this.ennemies.add(new Ennemy(this.game, params));
+            _.each(this.data, _.bind(function(params){
+                var e = new this.ennemiesClasses[this.ennemiesData[params[0]].class](this.game, params);
+                this.ennemies.add(e);
             }, this));
 
         };
