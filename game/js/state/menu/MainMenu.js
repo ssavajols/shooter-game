@@ -21,8 +21,8 @@ define(
          *
          */
         MainMenu.prototype.create = function(){
-            this.addItem('Start level 1', function(){ APPLICATION.start('level1');});
-            this.addItem('Start level 2', function(){ APPLICATION.start('level2');});
+            this.addItem('Start game', function(){ APPLICATION.start('level1');});
+            this.addItem('Start infinite game ', function(){ APPLICATION.start('level2');});
             this.addItem('Options', function(){ APPLICATION.start('gameOption');});
 
             this.menu.position.set(this.game.width/2-this.menu.width/2, this.game.height-this.menu.height-50);

@@ -6,12 +6,19 @@ define(
 
             this.do = function(){
 
-                setTimeout(_.bind(function(){
+                this.timer = setTimeout(_.bind(function(){
                     
+                    if( this.sprite.body === null ){
+                        clearInterval(this.interval);
+                        return;
+                    }
+
                     this.sprite.revive(this.sprite.health);
 
                     this.sprite.body.velocity.y = 50;
                     this.sprite.body.velocity.x = 40+Math.random()*10;
+
+                    this.sprite.body.velocity.x = _.random(-1, 1) * this.sprite.body.velocity.x;
 
                     clearInterval(this.interval);
 
@@ -44,6 +51,7 @@ define(
                 try {
                     if(this.sprite.position.y > this.sprite.game.world.height) {
                         clearInterval(this.interval);
+                        clearTimeout(this.timer);
                         this.sprite.parent.remove(this.sprite, true);
                     }
                 }catch(e){

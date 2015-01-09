@@ -101,7 +101,7 @@ define(
          */
         BaseLevel.prototype.collisions = function collisions(){
 
-            console.log(this.bulletManager.player.length, this.bulletManager.ennemies.length, this.explosions.length);
+            //console.log(this.bulletManager.player.length, this.bulletManager.ennemies.length, this.explosions.length);
 
             try {
                 this.physics.arcade.overlap(this.player, this.ennemies, this.playerHitted, null, this);
@@ -133,7 +133,7 @@ define(
             this.ennemies.remove(ennemy, true);
 
             if( !this.ennemies.length) {
-                APPLICATION.start('MainMenu');
+                this.end();
             }
 
         };
