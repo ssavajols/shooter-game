@@ -18,11 +18,11 @@ define(
         GameOption.prototype.constructor = GameOption.prototype.constructor;
 
         /**
-         *
+         * @method GameOption.prototype.create
          */
         GameOption.prototype.create = function(){
-            this.addItem('Difficulty');
-            this.addItem('Lives: '+APPLICATION.option.gameOptions.lives, _.bind(this.liveAction, this));
+            this.addItem('Difficulty', this.setDifficulty, ['easy', 'medium']);
+            this.addItem('Lives', this.setLive, [3, 5]);
             this.addItem('Retour', function(){ APPLICATION.start('MainMenu');});
 
             this.menu.position.set(this.game.width/2-this.menu.width/2, this.game.height-this.menu.height-50);
@@ -31,12 +31,17 @@ define(
         };
 
         /**
-         *
-         * @param text
+         * @method GameOption.prototype.setLive
          */
-        GameOption.prototype.liveAction = function(text){
-            APPLICATION.vars.lives = APPLICATION.vars.lives === 3 ? 5 :3;
-            text.setText('Lives: '+ APPLICATION.vars.lives);
+        GameOption.prototype.setLive = function setLive(){
+            APPLICATION.option.gameOptions.lives = this.value;
+        };
+
+        /**
+         * @method GameOption.prototype.setDifficulty
+         */
+        GameOption.prototype.setDifficulty = function setDifficulty(){
+            APPLICATION.option.gameOptions.difficulty = this.value;
         };
 
         return GameOption;

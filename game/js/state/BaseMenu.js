@@ -1,6 +1,8 @@
 define(
-    [],
-    function(){
+    [
+        'class/MenuItem'
+    ],
+    function(MenuItem){
 
         /**
          * @class BaseMenu
@@ -12,10 +14,12 @@ define(
         };
 
         /**
-         *
+         * @method BaseMenu.prototype.preload
          */
         BaseMenu.prototype.preload = function(){
             this.menu = this.add.group();
+
+            this.add.existing(this.menu);
 
             this.inputs = this.input.keyboard.createCursorKeys();
             this.inputs.valid = this.input.keyboard.addKey(32);
@@ -27,67 +31,60 @@ define(
             this.inputs.left.onDown.add(_.bind(this.cursorUp, this));
             this.inputs.up.onDown.add(_.bind(this.cursorUp, this));
         };
+
         /**
-         *
+         * @method BaseMenu.prototype.create
          */
         BaseMenu.prototype.create = _.noop;
+
         /**
-         *
+         * @method BaseMenu.prototype.update
          */
         BaseMenu.prototype.update = _.noop;
+
         /**
-         *
+         * @method BaseMenu.prototype.shutdown
          */
         BaseMenu.prototype.shutdown = function(){
             this.menu.destroy(true);
         };
+
         /**
-         *
+         * @method BaseMenu.prototype.addItem
          * @param item
          * @param callback
          */
-        BaseMenu.prototype.addItem = function(item, callback){
-            var textObject;
-            var y;
+        BaseMenu.prototype.addItem = function(label, action, values){
+            var y = 0;
             var first = this.menu.getFirstExists();
 
             if( first ){
                 y = this.menu.length*(first.height+5);
             }
 
-            if( typeof item === "string" ){
-                textObject = this.add.text(0, y, item, {font: 'normal 16px munroregular', fill:"white"});
-            }else{
-                textObject = item;
-            }
+            menuItem = new MenuItem(this.game, 0, y, label, {font: 'normal 16px munroregular', fill:"white"}, action, values);
 
-            this.menu.add(this.decoredMenuItem(textObject, callback));
-
+            this.menu.add(this.decoredMenuItem(menuItem));
+            
         };
+
         /**
-         *
+         * @method BaseMenu.prototype.decoredMenuItem
          * @param textObject
          * @param callback
          * @returns {*}
          */
-        BaseMenu.prototype.decoredMenuItem = function(textObject, callback){
+        BaseMenu.prototype.decoredMenuItem = function(menuItem){
 
-            textObject.inputEnabled = true;
-            textObject.interactive = true;
-            textObject.buttonMode = true;
-
-            if( typeof callback === "function" ){
-                textObject.events.onInputDown.add(callback, this);
-            }
-
-            textObject.events.onInputOver.add(_.bind(function(el){
+            menuItem.events.onInputOver.add(_.bind(function(el){
                 this.setActive(el);
-            }, this), textObject);
+            }, this), menuItem);
 
-            return textObject;
+            return menuItem;
         };
+
         /**
-         *
+         * @method BaseMenu.prototype.setActive
          * @param element
          */
         BaseMenu.prototype.setActive = function(element){
@@ -106,8 +103,9 @@ define(
                }
             });
         };
+
         /**
-         *
+         * @method BaseMenu.prototype._getActiveIndex
          * @returns {number}
          * @private
          */
@@ -122,24 +120,27 @@ define(
 
             return index;
         };
+
         /**
-         *
+         * @method BaseMenu.prototype.cursorDown
          */
         BaseMenu.prototype.cursorDown = function(){
             var selectedIndex = this._getActiveIndex()+1;
 
             this.setActive(this.menu.getAt(selectedIndex > this.menu.length-1 ? 0 : selectedIndex));
         };
+
         /**
-         *
+         * @method BaseMenu.prototype.cursorUp
          */
         BaseMenu.prototype.cursorUp = function(){
             var selectedIndex = this._getActiveIndex()-1;
 
             this.setActive(this.menu.getAt(selectedIndex < 0 ? this.menu.length-1 : selectedIndex));
         };
+
         /**
-         *
+         * @method BaseMenu.prototype.triggerSelectedMenu
          */
         BaseMenu.prototype.triggerSelectedMenu = function(){
             this.menu.forEach(function(el){
