@@ -16,7 +16,7 @@ define(
 
         // LEVELS
         'state/level/Level1',
-        'state/level/Level2'
+        'state/level/LevelInfinite'
     ],
     function(
             Application,
@@ -26,13 +26,13 @@ define(
             MainMenu,
             GameOption,
             Level1,
-            Level2
+            LevelInfinite
         ){
 
         window.APPLICATION = new Application(option);
 
         APPLICATION.newState('level1', false, new Level1());
-        APPLICATION.newState('level2', false, new Level2());
+        APPLICATION.newState('LevelInfinite', false, new LevelInfinite());
 
         APPLICATION.newState('MainMenu', false, new MainMenu());
         APPLICATION.newState('gameOption', false, new GameOption());

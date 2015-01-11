@@ -17,7 +17,7 @@ define(
             // Global game options
             gameOptions: {
                 lives:3,
-                difficulty:1,
+                difficulty:"easy",
                 bulletTypes: {
                     PLAYER_STANDARD: 1,
                     ENNEMY_STANDARD: 2

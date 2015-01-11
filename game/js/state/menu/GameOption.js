@@ -21,7 +21,7 @@ define(
          * @method GameOption.prototype.create
          */
         GameOption.prototype.create = function(){
-            this.addItem('Difficulty', this.setDifficulty, ['easy', 'medium']);
+            this.addItem('Difficulty', this.setDifficulty, ['easy', 'medium', 'hard']);
             this.addItem('Lives', this.setLive, [3, 5]);
             this.addItem('Retour', function(){ APPLICATION.start('MainMenu');});
 
