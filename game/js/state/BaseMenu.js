@@ -1,8 +1,9 @@
 define(
     [
-        'class/MenuItem'
+        'class/MenuItem',
+        "class/ParallaxMap",
     ],
-    function(MenuItem){
+    function(MenuItem, ParallaxMap){
 
         /**
          * @class BaseMenu
@@ -11,6 +12,7 @@ define(
         var BaseMenu = function(){
             this.menu = null;
             this.inputs = null;
+            this.map = new ParallaxMap();
         };
 
         /**
@@ -40,7 +42,14 @@ define(
         /**
          * @method BaseMenu.prototype.update
          */
-        BaseMenu.prototype.update = _.noop;
+        BaseMenu.prototype.update = function update(){
+            if( this.map.getLayers() !== null){
+                this.map.getLayers().forEach(function(layer){
+                    layer.tilePosition.x += layer.speed.x;
+                    layer.tilePosition.y += layer.speed.y;
+                });
+            }
+        };
 
         /**
          * @method BaseMenu.prototype.shutdown
@@ -62,7 +71,7 @@ define(
                 y = this.menu.length*(first.height+5);
             }
 
-            menuItem = new MenuItem(this.game, 0, y, label, {font: 'normal 16px munroregular', fill:"white"}, action, values);
+            menuItem = new MenuItem(this.game, 0, y, label, {font: 'normal 16px munroregular', fill:"white", stroke: "black", strokeThickness: 3}, action, values);
 
             this.menu.add(this.decoredMenuItem(menuItem));
             

@@ -28,6 +28,7 @@ define(
         BaseLevel.prototype.preload = function(){
 
             this.load.spritesheet('fire', 'assets/sprite/fireball.png', 32, 32);
+            this.load.spritesheet('birds', 'assets/sprite/birds.png', 32, 32);
             this.load.spritesheet('ship', 'assets/sprite/spaceship.png', 32, 32);
             this.load.spritesheet('explosion', 'assets/sprite/explosion.png', 64, 64);
             this.load.spritesheet('ennemies', 'assets/sprite/spaceshipennemies.png', 32, 32);

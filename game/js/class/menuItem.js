@@ -22,8 +22,10 @@ define(
             x = x ? x : 0;
             y = y ? y : 0;
             styles = _.defaults(styles, {
-                font: 'normal 12px Arial',
-                fill: 'white'
+                font: 'normal 12px munroregular',
+                fill: 'white',
+                stroke: 'black',
+                strokeThickness: 3
             });
 
             Phaser.Text.call(this, game, x, y, '', styles);

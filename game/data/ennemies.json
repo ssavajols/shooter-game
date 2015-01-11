@@ -22,5 +22,11 @@
       "sprite": 3,
       "moves": ["EnnemyMove001"],
       "movesRandom": false
+  },
+  "4": {
+      "class": "Ennemy002",
+      "sprite": 0,
+      "moves": ["EnnemyMove002"],
+      "movesRandom": false
   }
 }

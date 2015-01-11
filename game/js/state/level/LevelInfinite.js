@@ -43,16 +43,18 @@ define(
         LevelInfinite.prototype.create = function create(){
             this.startTime = this.game.time.now;
 
-            this.map.setParallaxLayer('galaxy', {x: 0, y:0.1});
+            this.map.setParallaxLayer('galaxy', {x: 0.05, y:0.1});
             this.map.setParallaxLayer('stars', {x:0.2, y:0.3}, {w: this.stage.width, h: this.stage.height});
 
-            this.score = this.game.add.text(0, 0, 0,  {font: 'normal 11px munroregular', fill:"white"});
+            BaseLevel.prototype.create.apply(this, arguments);
+
+
+            this.score = this.game.add.text(0, 0, 0,  {font: 'normal 11px munroregular', stroke: 'black', strokeThickness: 3, fill:"white", align:"center"});
+
             this.score.value = -1;
 
             this.updateScore();
-
-            BaseLevel.prototype.create.apply(this, arguments);
-        }; 
+        };
 
         /**
          * @method LevelInfinite.prototype.createEnnemies
@@ -77,11 +79,27 @@ define(
          */
         LevelInfinite.prototype.update = function update(){
 
+            var stars = this.map.getLayer('stars');
+
             var currentTime = this.game.time.now-this.startTime;
 
+            this.score.position.set(this.game.width/2-this.score.width/2, 5);
             if( (currentTime%1000) < currentTime/1000)  {
                 this.createEnnemies();
             }
+
+
+            if( !stars.speedAlpha ){
+                stars.speedAlpha = 0.01;
+            }
+
+            if( stars.alpha < 0.3 ){
+                stars.speedAlpha = 0.005;
+            }else if( stars.alpha > 0.7 ){
+                stars.speedAlpha = -0.005;
+            }
+
+            stars.alpha += stars.speedAlpha;
 
             BaseLevel.prototype.update.apply(this, arguments);
         };
@@ -123,7 +141,7 @@ define(
          * @method LevelInfinite.prototype.updateScore
          */
         LevelInfinite.prototype.updateScore = function updateScore(){
-            this.score.setText('score : ' + (++this.score.value));  
+            this.score.setText('SCORE\n' + (++this.score.value));
         };
 
         /**
